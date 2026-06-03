@@ -40,17 +40,17 @@ and ML are not implemented yet.
 POST /datasets
 GET /datasets
 GET /datasets/{dataset_id}
+POST /datasets/{dataset_id}/upload
+GET /incidents?dataset_id=...
+GET /incidents/{incident_id}
 ```
 
 Example create body:
 
 ```json
 {
-  "owner_id": "00000000-0000-0000-0000-000000000000",
   "name": "Sample crime dataset",
-  "source": "manual",
-  "status": "created",
-  "record_count": 0
+  "source": "manual"
 }
 ```
 
@@ -64,11 +64,11 @@ Implemented:
 - Reusable Supabase client module.
 - Supabase connectivity health endpoint.
 - Dataset metadata endpoints.
+- Incident retrieval endpoints.
 - CORS settings for local frontend development.
 
 Not implemented:
 
 - Authentication.
-- Dataset upload.
 - Supabase client.
 - ML or analysis logic.

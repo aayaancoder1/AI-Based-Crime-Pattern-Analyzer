@@ -57,6 +57,23 @@ Supabase connectivity check:
 GET http://localhost:8000/health/db
 ```
 
+Dataset metadata endpoints:
+
+```text
+POST http://localhost:8000/datasets
+GET http://localhost:8000/datasets
+GET http://localhost:8000/datasets/{dataset_id}
+```
+
+Example `POST /datasets` body:
+
+```json
+{
+  "name": "Sample crime dataset",
+  "source": "manual"
+}
+```
+
 ## Environment Files
 
 Copy the examples before local development:
@@ -76,6 +93,7 @@ Implemented:
 - Backend Supabase configuration.
 - Reusable backend Supabase client module.
 - Supabase connectivity health check.
+- Supabase-backed dataset metadata endpoints.
 - Basic React homepage.
 - Supabase schema migrations and seed data.
 
