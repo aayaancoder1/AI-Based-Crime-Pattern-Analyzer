@@ -51,3 +51,28 @@ class HotspotResponse(BaseModel):
 
 class HotspotListResponse(BaseModel):
     hotspots: list[HotspotResponse]
+
+
+class AnalyticsSummaryResponse(BaseModel):
+    total_incidents: int
+    total_hotspots: int
+    top_crime_type: str | None
+    top_district: str | None
+
+
+class CrimeTypeCountResponse(BaseModel):
+    crime_type: str
+    count: int
+
+
+class DistrictCountResponse(BaseModel):
+    district: str
+    count: int
+
+
+class RiskScoreResponse(BaseModel):
+    district: str
+    risk_score: int
+    risk_level: str
+    incident_count: int
+    hotspot_count: int
