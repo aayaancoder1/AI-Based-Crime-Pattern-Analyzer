@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Incident = {
   id: string;
@@ -93,45 +93,55 @@ function App() {
     return () => controller.abort();
   }, [submittedDatasetId]);
 
-  const center = useMemo<[number, number]>(() => {
-    if (!incidents.length) {
-      return [20, 0];
-    }
-
-    const avgLat = incidents.reduce((sum, incident) => sum + incident.latitude, 0) / incidents.length;
-    const avgLng = incidents.reduce((sum, incident) => sum + incident.longitude, 0) / incidents.length;
-    return [avgLat, avgLng];
-  }, [incidents]);
-
   useEffect(() => {
-    if (!mapRef.current || !window.L) {
+    if (!mapRef.current || !window.L || mapInstanceRef.current) {
       return;
     }
 
-    if (!mapInstanceRef.current) {
-      mapInstanceRef.current = window.L.map(mapRef.current, {
-        center,
-        zoom: incidents.length ? 10 : 2,
-        zoomControl: true,
-      });
+    const map = window.L.map(mapRef.current, {
+      center: [20, 0],
+      zoom: 2,
+      zoomControl: true,
+    });
 
-      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(mapInstanceRef.current);
+    window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-      layerGroupRef.current = window.L.layerGroup().addTo(mapInstanceRef.current);
-    }
+    mapInstanceRef.current = map;
+    layerGroupRef.current = window.L.layerGroup().addTo(map);
 
+    const handleResize = () => {
+      map.invalidateSize();
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(mapRef.current);
+
+    const raf = window.requestAnimationFrame(() => {
+      map.invalidateSize();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      resizeObserver.disconnect();
+      map.remove();
+      mapInstanceRef.current = null;
+      layerGroupRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
     const map = mapInstanceRef.current;
     const layerGroup = layerGroupRef.current;
-    if (!map || !layerGroup) {
+    if (!map || !layerGroup || !window.L) {
       return;
     }
 
     layerGroup.clearLayers();
 
     if (!incidents.length) {
-      map.setView(center, 2);
+      map.setView([20, 0], 2);
       return;
     }
 
@@ -150,15 +160,7 @@ function App() {
       `);
       marker.addTo(layerGroup);
     });
-  }, [center, incidents]);
-
-  useEffect(() => {
-    return () => {
-      mapInstanceRef.current?.remove();
-      mapInstanceRef.current = null;
-      layerGroupRef.current = null;
-    };
-  }, []);
+  }, [incidents]);
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
@@ -204,13 +206,12 @@ function App() {
         ) : null}
 
         <section className="relative min-h-[calc(100vh-11rem)] overflow-hidden rounded-lg border border-slate-800 bg-slate-900 shadow-lg shadow-black/20">
+          <div ref={mapRef} className="h-full min-h-[calc(100vh-11rem)] w-full" />
           {loading ? (
-            <div className="flex h-full min-h-[calc(100vh-11rem)] items-center justify-center text-sm text-slate-400">
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-950/40 text-sm text-slate-100">
               Loading incidents...
             </div>
-          ) : (
-            <div ref={mapRef} className="h-full min-h-[calc(100vh-11rem)] w-full" />
-          )}
+          ) : null}
           {!loading && !incidents.length ? (
             <div className="pointer-events-none absolute inset-x-0 bottom-0 flex min-h-[calc(100vh-11rem)] items-center justify-center px-6 text-center text-sm text-slate-400">
               {submittedDatasetId
