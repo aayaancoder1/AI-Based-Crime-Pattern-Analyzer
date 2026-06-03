@@ -17,6 +17,17 @@ type IncidentListResponse = {
   total_count: number;
 };
 
+type Hotspot = {
+  cluster_id: number;
+  incident_count: number;
+  center_latitude: number;
+  center_longitude: number;
+};
+
+type HotspotListResponse = {
+  hotspots: Hotspot[];
+};
+
 declare global {
   interface Window {
     L: any;
@@ -44,17 +55,21 @@ function App() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<any>(null);
   const layerGroupRef = useRef<any>(null);
+  const hotspotLayerRef = useRef<any>(null);
 
   const [datasetId, setDatasetId] = useState(DEFAULT_DATASET_ID);
   const [submittedDatasetId, setSubmittedDatasetId] = useState(DEFAULT_DATASET_ID);
   const [incidents, setIncidents] = useState<Incident[]>([]);
+  const [hotspots, setHotspots] = useState<Hotspot[]>([]);
   const [loading, setLoading] = useState(false);
+  const [hotspotLoading, setHotspotLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     if (!submittedDatasetId) {
       setIncidents([]);
+      setHotspots([]);
       setTotalCount(0);
       return;
     }
@@ -76,6 +91,7 @@ function App() {
 
         const payload = (await response.json()) as IncidentListResponse;
         setIncidents(payload.incidents);
+        setHotspots([]);
         setTotalCount(payload.total_count);
       } catch (err) {
         if ((err as Error).name === "AbortError") {
@@ -83,6 +99,7 @@ function App() {
         }
         setError(err instanceof Error ? err.message : "Failed to load incidents.");
         setIncidents([]);
+        setHotspots([]);
         setTotalCount(0);
       } finally {
         setLoading(false);
@@ -110,6 +127,7 @@ function App() {
 
     mapInstanceRef.current = map;
     layerGroupRef.current = window.L.layerGroup().addTo(map);
+    hotspotLayerRef.current = window.L.layerGroup().addTo(map);
 
     const handleResize = () => {
       map.invalidateSize();
@@ -128,6 +146,7 @@ function App() {
       map.remove();
       mapInstanceRef.current = null;
       layerGroupRef.current = null;
+      hotspotLayerRef.current = null;
     };
   }, []);
 
@@ -162,6 +181,67 @@ function App() {
     });
   }, [incidents]);
 
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    const hotspotLayer = hotspotLayerRef.current;
+    if (!map || !hotspotLayer || !window.L) {
+      return;
+    }
+
+    hotspotLayer.clearLayers();
+
+    hotspots.forEach((hotspot) => {
+      const circle = window.L.circleMarker(
+        [hotspot.center_latitude, hotspot.center_longitude],
+        {
+          radius: Math.max(8, Math.min(24, 6 + hotspot.incident_count)),
+          color: "#f59e0b",
+          weight: 2,
+          fillColor: "#f97316",
+          fillOpacity: 0.35,
+        }
+      );
+
+      circle.bindPopup(`
+        <div style="font-size:14px; line-height:1.45">
+          <div style="font-weight:600; margin-bottom:4px">Hotspot ${hotspot.cluster_id}</div>
+          <div>${hotspot.incident_count} incidents</div>
+        </div>
+      `);
+      circle.addTo(hotspotLayer);
+    });
+  }, [hotspots]);
+
+  async function detectHotspots() {
+    if (!submittedDatasetId) {
+      return;
+    }
+
+    setHotspotLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/analysis/hotspots/${submittedDatasetId}`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to detect hotspots (${response.status})`);
+      }
+
+      const payload = (await response.json()) as HotspotListResponse;
+      setHotspots(payload.hotspots);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to detect hotspots.");
+      setHotspots([]);
+    } finally {
+      setHotspotLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100">
       <section className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
@@ -195,6 +275,14 @@ function App() {
               type="submit"
             >
               Load
+            </button>
+            <button
+              className="rounded-md border border-amber-500/40 bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-200 transition hover:bg-amber-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={!submittedDatasetId || loading || hotspotLoading}
+              type="button"
+              onClick={detectHotspots}
+            >
+              {hotspotLoading ? "Detecting..." : "Detect Hotspots"}
             </button>
           </form>
         </header>

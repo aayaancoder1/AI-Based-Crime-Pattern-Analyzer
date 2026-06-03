@@ -8,6 +8,7 @@ dependencies = [
     "fastapi[standard]>=0.115.6",
     "httpx>=0.28.1",
     "pandas>=2.2.3",
+    "scikit-learn>=1.6.1",
     "pydantic-settings>=2.7.0",
     "supabase>=2.10.0"
 ]

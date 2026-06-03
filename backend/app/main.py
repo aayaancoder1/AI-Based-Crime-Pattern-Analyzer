@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
+from app.routers.analysis import router as analysis_router
 from app.routers.datasets import router as datasets_router
 from app.routers.incidents import router as incidents_router
 from app.supabase_client import get_supabase_headers, get_supabase_rest_url
@@ -20,6 +21,7 @@ app.add_middleware(
 
 app.include_router(datasets_router)
 app.include_router(incidents_router)
+app.include_router(analysis_router)
 
 
 @app.get("/health")

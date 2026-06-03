@@ -40,3 +40,14 @@ class IncidentResponse(BaseModel):
 class IncidentListResponse(BaseModel):
     incidents: list[IncidentResponse]
     total_count: int
+
+
+class HotspotResponse(BaseModel):
+    cluster_id: int
+    incident_count: int
+    center_latitude: float
+    center_longitude: float
+
+
+class HotspotListResponse(BaseModel):
+    hotspots: list[HotspotResponse]
