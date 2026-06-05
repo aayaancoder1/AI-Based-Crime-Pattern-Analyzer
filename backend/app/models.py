@@ -76,3 +76,7 @@ class RiskScoreResponse(BaseModel):
     risk_level: str
     incident_count: int
     hotspot_count: int
+
+
+class InsightResponse(BaseModel):
+    insights: list[str]

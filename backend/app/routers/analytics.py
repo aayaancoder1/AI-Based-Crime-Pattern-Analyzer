@@ -6,12 +6,14 @@ from app.models import (
     AnalyticsSummaryResponse,
     CrimeTypeCountResponse,
     DistrictCountResponse,
+    InsightResponse,
     RiskScoreResponse,
 )
 from app.repositories.analytics import (
     AnalyticsRepositoryError,
     get_crime_type_counts,
     get_district_counts,
+    get_insights,
     get_summary,
     get_risk_scores,
 )
@@ -69,3 +71,16 @@ def analytics_risk_scores(dataset_id: UUID) -> list[RiskScoreResponse]:
         raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=message) from exc
 
     return [RiskScoreResponse.model_validate(item) for item in scores]
+
+
+@router.get("/insights/{dataset_id}", response_model=InsightResponse)
+def analytics_insights(dataset_id: UUID) -> InsightResponse:
+    try:
+        insights = get_insights(dataset_id)
+    except AnalyticsRepositoryError as exc:
+        message = str(exc)
+        if message == "Dataset not found.":
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=message) from exc
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=message) from exc
+
+    return InsightResponse.model_validate(insights)

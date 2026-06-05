@@ -49,6 +49,10 @@ type RiskScore = {
   hotspot_count: number;
 };
 
+type InsightResponse = {
+  insights: string[];
+};
+
 declare global {
   interface Window {
     L: any;
@@ -90,10 +94,12 @@ function App() {
   const [crimeTypes, setCrimeTypes] = useState<AnalyticsCount[]>([]);
   const [districts, setDistricts] = useState<AnalyticsCount[]>([]);
   const [riskScores, setRiskScores] = useState<RiskScore[]>([]);
+  const [insights, setInsights] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [hotspotLoading, setHotspotLoading] = useState(false);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [riskLoading, setRiskLoading] = useState(false);
+  const [insightsLoading, setInsightsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState(0);
 
@@ -105,6 +111,7 @@ function App() {
       setCrimeTypes([]);
       setDistricts([]);
       setRiskScores([]);
+      setInsights([]);
       setTotalCount(0);
       return;
     }
@@ -132,6 +139,7 @@ function App() {
         setCrimeTypes([]);
         setDistricts([]);
         setRiskScores([]);
+        setInsights([]);
       } catch (err) {
         if ((err as Error).name === "AbortError") {
           return;
@@ -143,6 +151,7 @@ function App() {
         setCrimeTypes([]);
         setDistricts([]);
         setRiskScores([]);
+        setInsights([]);
         setTotalCount(0);
       } finally {
         setLoading(false);
@@ -163,6 +172,7 @@ function App() {
     async function loadAnalytics() {
       setAnalyticsLoading(true);
       setRiskLoading(true);
+      setInsightsLoading(true);
       setError(null);
 
       try {
@@ -195,6 +205,13 @@ function App() {
           throw new Error(`Failed to load risk scores (${riskResponse.status})`);
         }
         setRiskScores((await riskResponse.json()) as RiskScore[]);
+
+        const insightsResponse = await fetch(buildAnalyticsUrl("insights", submittedDatasetId));
+        if (!insightsResponse.ok) {
+          throw new Error(`Failed to load insights (${insightsResponse.status})`);
+        }
+        const insightPayload = (await insightsResponse.json()) as InsightResponse;
+        setInsights(insightPayload.insights);
       } catch (err) {
         if (cancelled) {
           return;
@@ -204,10 +221,12 @@ function App() {
         setCrimeTypes([]);
         setDistricts([]);
         setRiskScores([]);
+        setInsights([]);
       } finally {
         if (!cancelled) {
           setAnalyticsLoading(false);
           setRiskLoading(false);
+          setInsightsLoading(false);
         }
       }
     }
@@ -533,6 +552,30 @@ function App() {
                   )}
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-slate-800 bg-slate-900 p-4">
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="text-sm font-semibold text-white">AI Insights</h3>
+              {insightsLoading ? (
+                <span className="text-xs text-slate-500">Loading insights...</span>
+              ) : null}
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {insights.length ? (
+                insights.map((insight, index) => (
+                  <div
+                    key={`${index}-${insight}`}
+                    className="rounded-lg border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-200"
+                  >
+                    {insight}
+                  </div>
+                ))
+              ) : (
+                <div className="text-sm text-slate-500">No insights available.</div>
+              )}
             </div>
           </section>
         </section>

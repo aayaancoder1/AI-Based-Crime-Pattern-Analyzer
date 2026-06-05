@@ -233,3 +233,35 @@ def get_risk_scores(dataset_id: UUID) -> list[dict]:
 
     district_rows.sort(key=lambda row: row["risk_score"], reverse=True)
     return district_rows
+
+
+def get_insights(dataset_id: UUID) -> dict:
+    summary = get_summary(dataset_id)
+    risk_scores = get_risk_scores(dataset_id)
+    district_counts = get_district_counts(dataset_id)
+
+    if summary["total_incidents"] == 0:
+        return {"insights": ["No incidents were found for this dataset."]}
+
+    insights: list[str] = []
+
+    if summary["top_crime_type"]:
+        insights.append(f"{summary['top_crime_type']} is the most common crime type in this dataset.")
+
+    if summary["total_hotspots"] == 1:
+        insights.append("One crime hotspot was identified.")
+    else:
+        insights.append(f"{summary['total_hotspots']} crime hotspots were identified.")
+
+    if risk_scores:
+        highest_risk = risk_scores[0]
+        insights.append(f"{highest_risk['district']} has the highest risk score.")
+
+    if district_counts:
+        top_district = district_counts[0]["district"]
+        insights.append(f"{top_district} accounts for the largest share of reported incidents.")
+
+    if not insights:
+        insights.append("The dataset is available, but no clear patterns were identified.")
+
+    return {"insights": insights[:3]}
