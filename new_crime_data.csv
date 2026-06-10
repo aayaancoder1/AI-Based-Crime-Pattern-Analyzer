@@ -1,0 +1,119 @@
+crime_type,latitude,longitude,incident_date,district,description
+Theft,41.8789,-87.6354,2025-01-03,1,Phone stolen from commuter near transit stop
+Robbery,41.8817,-87.6278,2025-01-04,1,Victim approached and wallet taken by offender
+Assault,41.8852,-87.6296,2025-01-05,1,Physical altercation reported outside venue
+Theft,41.8764,-87.6247,2025-01-06,1,Bag reported stolen from parked vehicle
+Burglary,41.8891,-87.6322,2025-01-07,18,Residential break-in during daytime hours
+Vehicle Theft,41.8728,-87.6461,2025-01-08,12,Vehicle reported stolen from street parking
+Theft,41.8954,-87.6358,2025-01-09,18,Unattended bicycle taken from rack
+Robbery,41.9002,-87.6341,2025-01-10,18,Offender demanded cash and fled
+Assault,41.9038,-87.6387,2025-01-11,18,Fight between individuals resulted in injuries
+Theft,41.8977,-87.6285,2025-01-12,18,Shoplifting incident reported by retailer
+Vehicle Theft,41.9108,-87.6494,2025-01-13,19,SUV stolen overnight from curbside location
+Burglary,41.9146,-87.6521,2025-01-14,19,Forced entry into apartment reported
+Theft,41.9072,-87.6568,2025-01-15,19,Package theft from residential porch
+Assault,41.9195,-87.6443,2025-01-16,19,Victim struck during dispute
+Robbery,41.9258,-87.6497,2025-01-17,19,Personal belongings taken by unknown offender
+Theft,41.9418,-87.6534,2025-01-18,19,Phone stolen in crowded entertainment area
+Vehicle Theft,41.9472,-87.6556,2025-01-19,19,Sedan stolen from parking lot
+Burglary,41.9386,-87.6681,2025-01-20,19,Home burglary reported while occupants away
+Theft,41.9311,-87.6635,2025-01-21,19,Bicycle theft from residential building
+Assault,41.9447,-87.6712,2025-01-22,19,Assault reported after verbal confrontation
+Theft,41.7782,-87.6407,2025-01-23,7,Wallet stolen near commercial corridor
+Robbery,41.7719,-87.6342,2025-01-24,7,Victim robbed while walking at night
+Assault,41.7648,-87.6291,2025-01-25,7,Physical assault reported on sidewalk
+Burglary,41.7564,-87.6388,2025-01-26,7,Rear door forced open at residence
+Vehicle Theft,41.7493,-87.6325,2025-01-27,7,Vehicle stolen from residential street
+Theft,41.7824,-87.6236,2025-01-28,2,Personal items taken from parked car
+Robbery,41.7755,-87.6187,2025-01-29,2,Strong-arm robbery reported
+Assault,41.7692,-87.6154,2025-01-30,2,Victim sustained minor injuries in attack
+Theft,41.7608,-87.6129,2025-01-31,2,Store reported merchandise theft
+Vehicle Theft,41.7531,-87.6086,2025-02-01,2,Vehicle reported missing from lot
+Burglary,41.7449,-87.6023,2025-02-02,2,Residential burglary under investigation
+Theft,41.7364,-87.5968,2025-02-03,2,Package stolen from apartment lobby
+Assault,41.7298,-87.5907,2025-02-04,2,Assault incident reported near intersection
+Robbery,41.7237,-87.5842,2025-02-05,2,Victim robbed of cash and phone
+Vehicle Theft,41.7175,-87.5789,2025-02-06,2,Car stolen during overnight hours
+Theft,41.8947,-87.7103,2025-02-07,11,Phone stolen near bus stop
+Robbery,41.8886,-87.7058,2025-02-08,11,Offender displayed threat and took property
+Assault,41.8825,-87.7011,2025-02-09,11,Assault reported during street dispute
+Burglary,41.8762,-87.6965,2025-02-10,11,Residential break-in through rear window
+Vehicle Theft,41.8709,-87.6922,2025-02-11,11,Vehicle stolen from driveway
+Theft,41.8657,-87.6884,2025-02-12,11,Personal belongings stolen from vehicle
+Robbery,41.8601,-87.6847,2025-02-13,11,Robbery reported near retail area
+Assault,41.8548,-87.6799,2025-02-14,11,Victim assaulted by known individual
+Theft,41.8495,-87.6756,2025-02-15,11,Bicycle theft reported
+Vehicle Theft,41.8442,-87.6718,2025-02-16,11,Truck stolen from street parking
+Theft,41.8089,-87.7234,2025-02-17,10,Phone reported stolen at convenience store
+Robbery,41.8034,-87.7191,2025-02-18,10,Victim robbed while exiting vehicle
+Assault,41.7976,-87.7152,2025-02-19,10,Assault involving multiple individuals
+Burglary,41.7921,-87.7116,2025-02-20,10,Residence entered without permission
+Vehicle Theft,41.7868,-87.7075,2025-02-21,10,Vehicle theft reported overnight
+Theft,41.7812,-87.7038,2025-02-22,10,Tools stolen from work vehicle
+Robbery,41.7754,-87.6994,2025-02-23,10,Street robbery reported by victim
+Assault,41.7699,-87.6951,2025-02-24,10,Victim injured during altercation
+Burglary,41.7641,-87.6913,2025-02-25,10,Garage burglary reported
+Vehicle Theft,41.7586,-87.6877,2025-02-26,10,Car reported stolen from residence
+Theft,41.7382,-87.6538,2025-02-27,6,Package theft from front porch
+Robbery,41.7317,-87.6492,2025-02-28,6,Victim approached and robbed
+Assault,41.7258,-87.6457,2025-03-01,6,Assault near public transit location
+Burglary,41.7196,-87.6418,2025-03-02,6,Home burglary while occupants absent
+Vehicle Theft,41.7135,-87.6384,2025-03-03,6,Vehicle stolen from curbside parking
+Theft,41.7072,-87.6347,2025-03-04,6,Phone theft reported by victim
+Robbery,41.7014,-87.6302,2025-03-05,6,Robbery involving force reported
+Assault,41.6953,-87.6269,2025-03-06,6,Physical assault under investigation
+Theft,41.6897,-87.6228,2025-03-07,6,Personal property stolen from residence
+Vehicle Theft,41.6838,-87.6186,2025-03-08,6,Vehicle theft reported
+Theft,41.9682,-87.7086,2025-03-09,17,Wallet stolen near shopping area
+Burglary,41.9614,-87.7035,2025-03-10,17,Residential burglary reported
+Assault,41.9558,-87.6992,2025-03-11,17,Victim assaulted during dispute
+Theft,41.9497,-87.6948,2025-03-12,17,Bicycle theft from sidewalk rack
+Vehicle Theft,41.9435,-87.6904,2025-03-13,17,Vehicle stolen from parking area
+Robbery,41.9378,-87.6863,2025-03-14,17,Victim robbed of personal belongings
+Theft,41.9321,-87.6819,2025-03-15,17,Theft from unattended backpack
+Assault,41.9268,-87.6775,2025-03-16,17,Assault reported outside business
+Theft,41.9214,-87.6738,2025-03-17,17,Package theft under investigation
+Burglary,41.9157,-87.6691,2025-03-18,17,Forced entry into residence
+Theft,41.8346,-87.6279,2025-03-19,1,Phone stolen near transit station
+Robbery,41.8289,-87.6215,2025-03-20,1,Victim robbed while walking
+Assault,41.8235,-87.6162,2025-03-21,1,Assault reported in public area
+Burglary,41.8178,-87.6114,2025-03-22,1,Apartment burglary reported
+Vehicle Theft,41.8122,-87.6069,2025-03-23,1,Vehicle stolen from lot
+Theft,41.8067,-87.6018,2025-03-24,1,Personal items stolen from vehicle
+Robbery,41.8013,-87.5972,2025-03-25,1,Robbery reported by resident
+Assault,41.7958,-87.5926,2025-03-26,1,Victim injured during confrontation
+Theft,41.7904,-87.5881,2025-03-27,1,Merchandise theft reported
+Vehicle Theft,41.7851,-87.5835,2025-03-28,1,Vehicle reported stolen overnight
+Theft,41.9992,-87.6618,2025-03-29,24,Purse stolen from café patron
+Burglary,42.0028,-87.6694,2025-03-30,24,Residential burglary reported
+Vehicle Theft,41.9917,-87.6541,2025-03-31,24,Vehicle stolen from side street
+Assault,41.9856,-87.6738,2025-04-01,24,Assault near neighborhood business
+Robbery,42.0083,-87.6812,2025-04-02,24,Victim robbed while walking home
+Theft,41.8534,-87.9061,2025-04-03,16,Luggage reported stolen near airport area
+Vehicle Theft,41.9798,-87.9047,2025-04-04,16,Vehicle stolen from airport parking lot
+Burglary,41.7026,-87.5458,2025-04-05,4,Residential burglary near lakeshore area
+Theft,41.6651,-87.6207,2025-04-06,5,Phone stolen from local business
+Assault,41.9974,-87.8068,2025-04-07,16,Assault reported near residential block
+Robbery,41.9441,-87.7635,2025-04-08,25,Victim robbed near intersection
+Theft,41.9186,-87.7854,2025-04-09,25,Bicycle theft reported by resident
+Vehicle Theft,41.8752,-87.7642,2025-04-10,15,Vehicle stolen from street parking
+Assault,41.8469,-87.7348,2025-04-11,10,Assault following verbal dispute
+Burglary,41.9037,-87.7315,2025-04-12,14,Apartment burglary under investigation
+Theft,41.9678,-87.7246,2025-04-13,17,Package theft from residence
+Robbery,41.7391,-87.7025,2025-04-14,8,Victim robbed near commercial strip
+Assault,41.6859,-87.6712,2025-04-15,22,Physical assault reported by witness
+Theft,41.9132,-87.5998,2025-04-16,2,Phone stolen near park area
+Vehicle Theft,41.9721,-87.6889,2025-04-17,20,Vehicle reported stolen from neighborhood street
+Burglary,41.8916,-87.6514,2025-04-18,12,Residential burglary with forced entry
+Theft,41.7768,-87.5831,2025-04-19,3,Wallet stolen from unattended bag
+Assault,41.7284,-87.5616,2025-04-20,4,Victim assaulted during argument
+Robbery,41.8618,-87.6429,2025-04-21,12,Street robbery reported near business district
+Theft,41.9524,-87.6421,2025-04-22,19,Personal property stolen from vehicle
+Vehicle Theft,41.7412,-87.6158,2025-04-23,3,Vehicle theft reported overnight
+Burglary,41.8848,-87.6182,2025-04-24,1,Commercial burglary under investigation
+Theft,41.9247,-87.7064,2025-04-25,14,Bicycle theft from outside residence
+Assault,41.8038,-87.6176,2025-04-26,2,Assault reported near community area
+Robbery,41.8761,-87.7228,2025-04-27,11,Victim robbed while walking home
+Theft,41.9463,-87.6785,2025-04-28,17,Package theft reported by resident
+Vehicle Theft,41.7694,-87.6431,2025-04-29,7,Vehicle stolen from residential street
+Burglary,41.9292,-87.6486,2025-04-30,19,Home burglary reported during daytime hours
